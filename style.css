@@ -1,0 +1,430 @@
+/* ========================================
+   1. DESIGN SETTINGS - PURPLE THEME
+======================================== */
+
+:root {
+    --page: #2d2fa0;
+    --panel: #ffffff;
+    --ink: #202444;
+    --muted: #7a7091;
+    --line: #e2d5f2;
+    --mine: #8b5cf6;
+    --mine-text: #ffffff;
+    --theirs: #f0e7ff;
+    --focus: #c084fc;
+}
+
+/* ========================================
+   2. GLOBAL STYLES
+======================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 16px;
+    display: grid;
+    place-items: center;
+    background: var(--page);
+    color: var(--ink);
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ========================================
+   3. MAIN CHAT WINDOW
+======================================== */
+
+.chat {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 560px;
+    height: min(720px, calc(100vh - 32px));
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(91, 33, 182, 0.12);
+}
+
+/* ========================================
+   4. LOGIN AND SIGN-UP SCREEN
+======================================== */
+
+.auth {
+    height: auto;
+    min-height: 0;
+    padding: 28px;
+}
+
+.auth h1 {
+    margin: 0;
+    font-size: 1.7rem;
+    color: #7c3aed;
+}
+
+.subtitle {
+    margin: 8px 0 20px;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+#auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#auth-form label {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+#auth-form input {
+    width: 100%;
+    min-width: 0;
+    padding: 11px 12px;
+    font: inherit;
+    color: var(--ink);
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+}
+
+#auth-form input::placeholder {
+    color: #a99ab9;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.auth-buttons button {
+    flex: 1;
+}
+
+.auth-message {
+    min-height: 1.4em;
+    margin: 14px 0 0;
+    color: #b42370;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+/* ========================================
+   5. CHAT HEADER
+======================================== */
+
+.chat-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--line);
+    background: #fcfaff;
+}
+
+.chat-header h1 {
+    margin: 0;
+    font-size: 1.3rem;
+    color: #7c3aed;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+#who {
+    color: var(--ink);
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+/* ========================================
+   6. MESSAGE AREA
+======================================== */
+
+.messages {
+    flex: 1;
+    min-height: 0;
+    list-style: none;
+    margin: 0;
+    padding: 18px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    scroll-behavior: smooth;
+}
+
+.message {
+    align-self: flex-start;
+    max-width: 85%;
+    padding: 9px 12px;
+    background: var(--theirs);
+    border-radius: 14px;
+    border-bottom-left-radius: 4px;
+    overflow-wrap: anywhere;
+    animation: appear 0.15s ease-out;
+}
+
+.message.mine {
+    align-self: flex-end;
+    background: var(--mine);
+    color: var(--mine-text);
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 4px;
+}
+
+.message.bot {
+    align-self: flex-start;
+    background: #f5eaff;
+    color: #592c82;
+    border: 1px solid #d8b4fe;
+}
+
+.message .author {
+    display: block;
+    margin-bottom: 3px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+.message.mine .author {
+    color: #ede1ff;
+}
+
+.message p {
+    margin: 0;
+    line-height: 1.45;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.message time {
+    display: block;
+    margin-top: 5px;
+    text-align: right;
+    font-size: 0.72rem;
+    color: var(--muted);
+}
+
+.message.mine time {
+    color: #ede1ff;
+}
+
+/* ========================================
+   7. MESSAGE INPUT
+======================================== */
+
+.composer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 14px;
+    border-top: 1px solid var(--line);
+    background: var(--panel);
+}
+
+.composer input {
+    flex: 1;
+    min-width: 0;
+    padding: 11px 12px;
+    font: inherit;
+    color: var(--ink);
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+}
+
+.composer input::placeholder {
+    color: #a99ab9;
+}
+
+.composer input:focus,
+#auth-form input:focus {
+    border-color: #a78bfa;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.15);
+}
+
+/* ========================================
+   8. BUTTONS
+======================================== */
+
+button {
+    padding: 10px 16px;
+    font: inherit;
+    font-weight: 600;
+    border: 0;
+    border-radius: 9px;
+    background: var(--mine);
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.2s, opacity 0.2s;
+}
+
+button:hover {
+    background: #7c3aed;
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+button.ghost {
+    padding: 7px 11px;
+    background: transparent;
+    color: #7c3aed;
+    border: 1px solid var(--line);
+}
+
+button.ghost:hover {
+    background: #f0e7ff;
+}
+
+/* ========================================
+   9. CHAT STATUS MESSAGE
+======================================== */
+
+#chat-message {
+    margin: 0;
+    padding: 0 14px;
+    color: #b42370;
+    font-size: 0.85rem;
+    overflow-wrap: anywhere;
+}
+
+#chat-message:empty {
+    display: none;
+}
+
+#chat-message:not(:empty) {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+/* ========================================
+   10. KEYBOARD FOCUS
+======================================== */
+
+input:focus-visible,
+button:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+}
+
+/* ========================================
+   11. MESSAGE ANIMATION
+======================================== */
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================================
+   12. MOBILE RESPONSIVE DESIGN
+======================================== */
+
+@media (max-width: 480px) {
+    body {
+        padding: 8px;
+    }
+
+    .chat {
+        height: calc(100vh - 16px);
+        border-radius: 10px;
+    }
+
+    .auth {
+        height: auto;
+        padding: 22px;
+    }
+
+    .chat-header {
+        padding: 12px;
+    }
+
+    .chat-header h1 {
+        font-size: 1.15rem;
+    }
+
+    .controls {
+        font-size: 0.8rem;
+        gap: 6px;
+    }
+
+    .messages {
+        padding: 12px;
+    }
+
+    .message {
+        max-width: 90%;
+    }
+
+    .composer {
+        padding: 10px;
+        gap: 6px;
+    }
+
+    .composer input {
+        padding: 10px;
+    }
+
+    .composer button {
+        padding: 10px 12px;
+    }
+}
+
+/* Reduce animations for accessibility. */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}
